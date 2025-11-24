@@ -88,4 +88,11 @@ Run instrumented tests:
 
 ## License
 
-MIT
+This project is available under multiple permissive licenses for maximum flexibility:
+
+- **MIT License** (primary) - Simple and permissive
+- **Apache 2.0** - Includes explicit patent grants
+- **BSD 3-Clause** - Slightly more formal than MIT
+- **ISC License** - Minimal alternative
+
+All licenses are business-friendly and allow commercial use. See the [LICENSE](./LICENSE) file for full details on all available licenses.
