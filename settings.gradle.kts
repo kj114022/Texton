@@ -16,6 +16,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Pantheon"
+rootProject.name = "Texton"
 include(":app")
  

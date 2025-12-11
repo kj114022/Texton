@@ -121,9 +121,12 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
     }
 
     private fun setupRecyclerView() {
-        binding.rvBooks.apply {
+            binding.rvBooks.apply {
             adapter = booksAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(
+                2,
+                androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+            )
         }
     }
 

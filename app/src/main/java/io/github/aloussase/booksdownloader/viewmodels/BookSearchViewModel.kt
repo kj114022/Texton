@@ -17,6 +17,11 @@ class BookSearchViewModel @Inject constructor(
     val bookSearchRepository: io.github.aloussase.booksdownloader.domain.repository.BookSearchRepository
 ) : ViewModel() {
 
+    init {
+        // Simulate trending/popular books by searching for a broad term initially
+        onSearch("bestsellers")
+    }
+
     sealed class Event {
         data class OnApplyFilter(val format: BookFormat) : Event()
         data class OnRemoveFilter(val format: BookFormat) : Event()

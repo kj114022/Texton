@@ -55,4 +55,6 @@ captures/
 .env.*.local
 
 # Notes and documentation folder
-notes/
+# notes/
+# notes/Previous
+# notes/Phase2
