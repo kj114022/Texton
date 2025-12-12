@@ -26,7 +26,8 @@
         "share_plus",
         "shared_preferences",
         "shimmer",
-        "url_launcher"
+        "url_launcher",
+        "uuid"
       ],
       "devDependencies": [
         "build_runner",
@@ -116,6 +117,15 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "uuid",
+      "version": "4.5.2",
+      "dependencies": [
+        "crypto",
+        "fixnum",
+        "meta"
       ]
     },
     {
@@ -770,6 +780,11 @@
       ]
     },
     {
+      "name": "fixnum",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
       "name": "http_parser",
       "version": "4.1.2",
       "dependencies": [
@@ -1296,15 +1311,6 @@
       ]
     },
     {
-      "name": "uuid",
-      "version": "4.5.2",
-      "dependencies": [
-        "crypto",
-        "fixnum",
-        "meta"
-      ]
-    },
-    {
       "name": "sqflite",
       "version": "2.4.2",
       "dependencies": [
@@ -1339,11 +1345,6 @@
         "pub_semver",
         "yaml"
       ]
-    },
-    {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
     },
     {
       "name": "vm_service",

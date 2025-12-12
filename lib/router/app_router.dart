@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../screens/feed/feed_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/details/book_details_screen.dart';
 import '../screens/convert/convert_screen.dart';
@@ -9,13 +10,24 @@ import '../widgets/main_scaffold.dart';
 
 /// Application router configuration using go_router
 final appRouter = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/feed',
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return MainScaffold(navigationShell: navigationShell);
       },
       branches: [
+        // Feed tab (4chan-style board)
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/feed',
+              name: 'feed',
+              builder: (context, state) => const FeedScreen(),
+            ),
+          ],
+        ),
+        // Search tab (book search)
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -32,6 +44,7 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+        // Convert tab
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -41,6 +54,7 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+        // Library tab
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -50,6 +64,7 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+        // Settings tab
         StatefulShellBranch(
           routes: [
             GoRoute(
