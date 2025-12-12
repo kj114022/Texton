@@ -206,7 +206,7 @@ class SettingsScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.xBlue.withValues(alpha: 0.15),
+            AppColors.primary.withValues(alpha: 0.15),
             AppColors.surface,
           ],
           begin: Alignment.topLeft,
@@ -214,7 +214,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppColors.xBlue.withValues(alpha: 0.3),
+          color: AppColors.primary.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -224,15 +224,12 @@ class SettingsScreen extends ConsumerWidget {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: AppColors.xBlue,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Center(
-              child: Icon(
-                CupertinoIcons.book_fill,
-                color: AppColors.textPrimary,
-                size: 28,
-              ),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset(
+              'assets/images/texton.png',
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 16),
