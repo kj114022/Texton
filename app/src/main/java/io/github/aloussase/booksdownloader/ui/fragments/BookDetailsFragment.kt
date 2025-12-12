@@ -25,6 +25,8 @@ class BookDetailsFragment : BaseApplicationFragment(R.layout.fragment_book_detai
             tvTitle.text = book.title
             tvAuthor.text = book.authors.joinToString(", ")
             chipSource.text = book.source
+            tvFormat.text = "Format: ${book.extension.uppercase()}"
+            tvSize.text = "Size: ${book.size.ifEmpty { "Unknown" }}"
             
             GlideApp.with(this@BookDetailsFragment)
                 .load(book.cover())
@@ -32,10 +34,51 @@ class BookDetailsFragment : BaseApplicationFragment(R.layout.fragment_book_detai
                 .error(R.drawable.cover)
                 .into(ivBookCover)
 
-            btnDownload.setOnClickListener {
-                setBookForDownload(book)
-                downloadBook()
+            val filename = "${book.title}.${book.extension}"
+            val file = java.io.File(
+                android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS),
+                filename
+            )
+
+            if (file.exists()) {
+                btnDownload.text = "Open"
+                btnDownload.setOnClickListener {
+                    openBook(file, book.extension)
+                }
+            } else {
+                btnDownload.text = "Download"
+                btnDownload.setOnClickListener {
+                    setBookForDownload(book)
+                    downloadBook()
+                }
             }
+        }
+    }
+
+    private fun openBook(file: java.io.File, extension: String) {
+        try {
+            val uri = androidx.core.content.FileProvider.getUriForFile(
+                requireContext(),
+                "${requireContext().packageName}.provider",
+                file
+            )
+            val mimeType = when (extension.lowercase()) {
+                "pdf" -> "application/pdf"
+                "epub" -> "application/epub+zip"
+                "mobi" -> "application/x-mobipocket-ebook"
+                "azw3" -> "application/vnd.amazon.ebook" // fallback
+                else -> "*/*"
+            }
+            
+            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, mimeType)
+                addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Should show snackbar here ideally
         }
     }
 }

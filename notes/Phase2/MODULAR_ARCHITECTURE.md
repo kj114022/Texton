@@ -1,7 +1,7 @@
-# Modular Architecture Plan for Pantheon App
+# Modular Architecture Plan for Texton App
 
 ## Overview
-This document outlines the plan to extend Pantheon from a simple book downloader into a modular, multi-feature platform with clear separation of concerns.
+This document outlines the plan to extend Texton from a simple book downloader into a modular, multi-feature platform with clear separation of concerns.
 
 ## Current State
 - **Base Module**: `io.github.aloussase.booksdownloader` (Book Downloader)

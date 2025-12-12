@@ -7,13 +7,18 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.aloussase.booksdownloader.Constants
+import io.github.aloussase.booksdownloader.data.source.AnnasArchiveSource
+import io.github.aloussase.booksdownloader.data.source.LibgenSource
+import io.github.aloussase.booksdownloader.data.source.WebSearchSource
 import io.github.aloussase.booksdownloader.domain.repository.BookConversionRepository
 import io.github.aloussase.booksdownloader.domain.repository.BookDownloadsRepository
+import io.github.aloussase.booksdownloader.domain.repository.BookSearchRepository
 import io.github.aloussase.booksdownloader.domain.use_case.ConvertBookUseCase
 import io.github.aloussase.booksdownloader.domain.use_case.FilterBooksUseCase
 import io.github.aloussase.booksdownloader.remote.PantheonApi
 import io.github.aloussase.booksdownloader.repositories.BookConversionRepositoryImpl
 import io.github.aloussase.booksdownloader.repositories.BookDownloadsRepositoryImpl
+import io.github.aloussase.booksdownloader.repositories.BookSearchRepositoryImpl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -75,15 +80,14 @@ object AppModule {
     @Singleton
     @Provides
     fun provideBookSearchRepository(
-        libgenSource: io.github.aloussase.booksdownloader.data.source.LibgenSource,
-        annasArchiveSource: io.github.aloussase.booksdownloader.data.source.AnnasArchiveSource
-        // OceanOfPdf disabled - returns 403 errors
-        // oceanOfPdfSource: io.github.aloussase.booksdownloader.data.source.OceanOfPdfSource
-    ): io.github.aloussase.booksdownloader.domain.repository.BookSearchRepository {
-        return io.github.aloussase.booksdownloader.repositories.BookSearchRepositoryImpl(
+        libgenSource: LibgenSource,
+        annasArchiveSource: AnnasArchiveSource,
+        webSearchSource: WebSearchSource
+    ): BookSearchRepository {
+        return BookSearchRepositoryImpl(
             libgenSource,
-            annasArchiveSource
-            // oceanOfPdfSource  // Disabled
+            annasArchiveSource,
+            webSearchSource
         )
     }
 

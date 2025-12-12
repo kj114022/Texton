@@ -1,4 +1,4 @@
-# Pantheon Modular Architecture - Visual Summary
+# Texton Modular Architecture - Visual Summary
 
 ## Project Overview
 
@@ -325,7 +325,7 @@ PDF Box             2.0.27.0
 ## Documentation Files Location
 
 ```
-/Users/tourist/code/Pantheon_apk/
+/Users/tourist/code/Texton_apk/
 ├─ MODULAR_ARCHITECTURE.md          (🔵 High-level overview)
 ├─ IMPLEMENTATION_GUIDE.md          (🔵 Detailed steps)
 ├─ PHASE_2_READER_GUIDE.md          (🔵 Reader specifics)

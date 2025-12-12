@@ -1,4 +1,4 @@
-# Pantheon
+# Texton
 
 Android application for downloading and converting eBooks.
 
@@ -12,8 +12,8 @@ Android application for downloading and converting eBooks.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kj114022/Pantheon_apk.git
-   cd Pantheon_apk
+   git clone https://github.com/kj114022/Texton_apk.git
+   cd Texton_apk
    ```
 
 2. Configure `local.properties`:

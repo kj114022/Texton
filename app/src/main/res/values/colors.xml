@@ -12,5 +12,10 @@
     <color name="green">#FFAAD9BB</color>
     <color name="lime">#FFD5F0C1</color>
     <color name="dark_green">#FF092635</color>
-    <color name="light_gray">#FFD3D3D3</color>
+    <color name="cream_background">#FDFBF7</color>
+    <color name="cream_surface">#FFFDD0</color>
+    <color name="text_primary">#222222</color>
+    <color name="text_secondary">#666666</color>
+    <color name="accent_gradient_start">#FF4169E1</color>
+    <color name="accent_gradient_end">#FF87CEFA</color>
 </resources>

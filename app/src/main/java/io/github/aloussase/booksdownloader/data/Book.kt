@@ -22,6 +22,7 @@ data class Book(
 
 
 fun Book.cover(): String {
+    if (imageUrl.isEmpty()) return ""
     return "https://library.lol/$imageUrl"
 }
 

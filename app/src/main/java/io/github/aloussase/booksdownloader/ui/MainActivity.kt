@@ -36,6 +36,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Apply Dark Mode
+        val prefs = getSharedPreferences("app_settings", MODE_PRIVATE)
+        val isDarkMode = prefs.getBoolean("dark_mode", false)
+        val mode = if (isDarkMode) {
+             androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+             androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+        }
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(mode)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

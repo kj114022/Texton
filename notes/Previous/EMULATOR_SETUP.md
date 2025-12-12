@@ -1,6 +1,6 @@
 # Android Emulator Setup and Running Guide
 
-This guide walks you through setting up and running the Pantheon app on an Android emulator.
+This guide walks you through setting up and running the Texton app on an Android emulator.
 
 ## Prerequisites
 
@@ -109,7 +109,7 @@ echo "Building and installing app..."
 ./gradlew installDebug
 
 # Launch the app
-echo "Launching Pantheon..."
+echo "Launching Texton..."
 $ANDROID_HOME/platform-tools/adb shell am start -n io.github.aloussase.booksdownloader/.MainActivity
 
 echo "Done! App should now be running."
@@ -121,7 +121,7 @@ Here are some helpful commands for debugging and managing the app:
 
 ### View Logs
 ```bash
-$ANDROID_HOME/platform-tools/adb logcat | grep Pantheon
+$ANDROID_HOME/platform-tools/adb logcat | grep Texton
 ```
 
 ### Uninstall the App

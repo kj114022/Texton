@@ -2,7 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navSearch">
+    app:startDestination="@id/navFeed">
+
+    <fragment
+        android:id="@+id/navFiles"
+        android:name="io.github.aloussase.booksdownloader.ui.files.FilesFragment"
+        android:label="Files" />
+
+    <fragment
+        android:id="@+id/navFeed"
+        android:name="io.github.aloussase.booksdownloader.ui.feed.FeedFragment"
+        android:label="Home">
+         <action
+            android:id="@+id/action_navFeed_to_navSearch"
+            app:destination="@id/navSearch" />
+    </fragment>
 
     <fragment
         android:id="@+id/navSearch"

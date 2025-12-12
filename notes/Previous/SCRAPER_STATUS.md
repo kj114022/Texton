@@ -2,7 +2,7 @@
 
 ## Current Status ✅
 
-The Pantheon app now searches across **3 book sources**, but there are improvements needed for better results:
+The Texton app now searches across **3 book sources**, but there are improvements needed for better results:
 
 ### 1. **Libgen** (libgen.rs) ✅ 
 - **Status**: URL updated to working mirror

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import io.github.aloussase.booksdownloader.R
 import io.github.aloussase.booksdownloader.adapters.BooksAdapter
 import io.github.aloussase.booksdownloader.data.BookFormat
 import io.github.aloussase.booksdownloader.databinding.FragmentHomeBinding
-import io.github.aloussase.booksdownloader.services.BookSearchService
 import io.github.aloussase.booksdownloader.viewmodels.BookSearchViewModel
 
 @AndroidEntryPoint
@@ -28,6 +28,7 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
     private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
 
     private lateinit var binding: FragmentHomeBinding
+    private var searchView: SearchView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +42,7 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
         setupRecyclerView()
         setupBookSearchObserver()
         setupFormatFilters()
+        setupTrendingChips()
 
         booksAdapter.setOnItemDownloadListener { book ->
             setBookForDownload(book)
@@ -71,9 +73,23 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
         return binding.root
     }
 
+    private fun setupTrendingChips() {
+        for (i in 0 until binding.chipGroupTrending.childCount) {
+            val chip = binding.chipGroupTrending.getChildAt(i) as com.google.android.material.chip.Chip
+            chip.setOnClickListener {
+                val query = chip.tag.toString()
+                // Update search view text if available
+                searchView?.setQuery(query, false)
+                searchView?.clearFocus()
+                
+                // Trigger search
+                bookSearchViewModel.onEvent(BookSearchViewModel.Event.OnSearch(query))
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-
         askForNotificationPermissions()
     }
 
@@ -84,13 +100,34 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.findItem(R.id.action_filter)?.isVisible = false
-    }
+        // Ensure filters are hidden if no books/initial state
+        val filterItem = menu.findItem(R.id.action_filter)
+        val booksEmpty = bookSearchViewModel.books.value?.isEmpty() ?: true
+        filterItem?.isVisible = !booksEmpty
 
+        // Capture SearchView
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem?.actionView as? SearchView
+        
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    bookSearchViewModel.onEvent(BookSearchViewModel.Event.OnSearch(it))
+                    searchView?.clearFocus()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    }
+    
+    // Note: onPrepareOptionsMenu is deprecated but still useful for updates
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-
-        val booksEmpty = bookSearchViewModel.books.value?.isEmpty() ?: return
+        val booksEmpty = bookSearchViewModel.books.value?.isEmpty() ?: true
         menu.findItem(R.id.action_filter)?.isVisible = !booksEmpty
     }
 
@@ -100,7 +137,6 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
                 binding.filters.isVisible = !binding.filters.isVisible
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -123,10 +159,7 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
     private fun setupRecyclerView() {
             binding.rvBooks.apply {
             adapter = booksAdapter
-            layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(
-                2,
-                androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
-            )
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
@@ -137,6 +170,8 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
                     binding.rvBooks.visibility = View.GONE
                     binding.llLoading.visibility = View.GONE
                     binding.tvGreeting.visibility = View.VISIBLE
+                    binding.tvTrendingLabel.visibility = View.VISIBLE
+                    binding.chipGroupTrending.visibility = View.VISIBLE
                     binding.tvError.visibility = View.GONE
                 }
 
@@ -144,6 +179,8 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
                     binding.rvBooks.visibility = View.GONE
                     binding.llLoading.visibility = View.VISIBLE
                     binding.tvGreeting.visibility = View.GONE
+                    binding.tvTrendingLabel.visibility = View.GONE
+                    binding.chipGroupTrending.visibility = View.GONE
                     binding.tvError.visibility = View.GONE
                 }
 
@@ -153,15 +190,20 @@ class BookSearchFragment : BaseApplicationFragment(R.layout.fragment_home) {
                     binding.rvBooks.visibility = View.VISIBLE
                     binding.llLoading.visibility = View.GONE
                     binding.tvGreeting.visibility = View.GONE
+                    binding.tvTrendingLabel.visibility = View.GONE
+                    binding.chipGroupTrending.visibility = View.GONE
                     binding.tvError.visibility = View.GONE
                 }
 
                 is BookSearchViewModel.State.Error -> {
+                    // Keep trending visible on error? Probably not.
                     binding.rvBooks.visibility = View.GONE
                     binding.tvGreeting.visibility = View.GONE
+                    binding.tvTrendingLabel.visibility = View.GONE
+                    binding.chipGroupTrending.visibility = View.GONE
                     binding.llLoading.visibility = View.GONE
                     binding.tvError.visibility = View.VISIBLE
-                    binding.tvError.text = getString(R.string.error_fetching_books) // Or use state.message
+                    binding.tvError.text = getString(R.string.error_fetching_books) 
                 }
             }
         }

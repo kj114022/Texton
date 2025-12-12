@@ -1,17 +1,17 @@
-# 🏛️ Pantheon Update Summary
+# 🏛️ Texton Update Summary
 
 ## ✅ Renaming Complete
-The application has been fully renamed from **Alexandria** to **Pantheon**.
+The application has been fully renamed from **Alexandria** to **Texton**.
 
 ### Changes Applied:
-- **App Name**: displayed as "Pantheon" on the device.
-- **Themes**: Updated to `Theme.Pantheon`.
+- **App Name**: displayed as "Texton" on the device.
+- **Themes**: Updated to `Theme.Texton`.
 - **Codebase**:
-  - Renamed `AlexandriaApi` → `PantheonApi`
-  - Renamed `AlexandriaResult` → `PantheonResult`
+  - Renamed `AlexandriaApi` → `TextonApi`
+  - Renamed `AlexandriaResult` → `TextonResult`
   - Updated `AppModule` and Repositories to use new classes.
 - **Configuration**:
-  - `settings.gradle.kts`: Root project is now "Pantheon".
+  - `settings.gradle.kts`: Root project is now "Texton".
   - `README.md`: Updated all text and links.
   - `fastlane`: Updated store listing title and description.
 - **URLs**:
@@ -33,7 +33,7 @@ The application has been fully renamed from **Alexandria** to **Pantheon**.
 
 ## 🚀 How to Test
 
-1. **Launch the App**: It should appear as "Pantheon" with the new name.
+1. **Launch the App**: It should appear as "Texton" with the new name.
 2. **Search**: Tap the search icon and enter a query (e.g., "Harry Potter").
 3. **Verify**: Books should appear from the configured sources.
 

@@ -1,4 +1,4 @@
-# Pantheon Modular App - Documentation Index
+# Texton Modular App - Documentation Index
 
 ## 📖 Start Here
 
@@ -55,7 +55,7 @@
 
 ### Root Level Documentation
 ```
-/Users/tourist/code/Pantheon_apk/
+/Users/tourist/code/Texton_apk/
 ├── README.md                        (Project description)
 ├── LICENSE                          (License information)
 │

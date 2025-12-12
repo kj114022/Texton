@@ -15,7 +15,7 @@ Core utilities and documentation created:
 ### Step 1: Verify Core Build
 
 ```bash
-cd /Users/tourist/code/Pantheon_apk
+cd /Users/tourist/code/Texton_apk
 ./gradlew build
 ```
 

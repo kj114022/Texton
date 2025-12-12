@@ -98,7 +98,7 @@ class LibgenSource @Inject constructor() : BookSource {
         return buildString {
             append("$baseUrl/search.php?req=")
             append(URLEncoder.encode(query, "UTF-8"))
-            append("&res=50")
+            append("&res=100")
             append("&column=def")
             append("&sort=year")
             append("&sortmode=DESC")

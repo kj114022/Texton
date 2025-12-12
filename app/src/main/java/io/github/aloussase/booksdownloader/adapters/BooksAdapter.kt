@@ -70,33 +70,13 @@ class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
         val book = books[position]
         holder.itemView.apply {
-            setOnClickListener { onItemClickListener?.invoke(book) }
-
-            val btnDownload = findViewById<Button>(R.id.btnDownload)
-            btnDownload.setOnClickListener { onItemDownloadListener(book) }
-            btnDownload.text = book.extension.uppercase()
-            // Removed custom background to use Material styling
-            // btnDownload.background = book.getDrawable(resources, context)
+            // Whole row clicks to download
+            setOnClickListener { onItemDownloadListener(book) }
 
             val tvTitle = findViewById<TextView>(R.id.tvTitle)
-            tvTitle.text = book.title
-
-            val tvAuthors = findViewById<TextView>(R.id.tvAuthors)
-            tvAuthors.text = book.authors.joinToString(", ")
-
-            val tvSize = findViewById<TextView>(R.id.tvSize)
-            tvSize.text = book.size
-
-            val chipSource = findViewById<com.google.android.material.chip.Chip>(R.id.chipSource)
-            chipSource.text = book.source
-
-            val ivCover = findViewById<ImageView>(R.id.ivBookCover)
-            GlideApp
-                .with(this)
-                .load(book.cover())
-                .placeholder(R.drawable.cover) // Assuming a placeholder exists or use error
-                .error(R.drawable.cover)
-                .into(ivCover)
+            val sizeStr = if (book.size.isNotEmpty()) " (${book.size})" else ""
+            val extStr = if (book.extension.isNotEmpty()) " [${book.extension.uppercase()}]" else ""
+            tvTitle.text = "${book.title}$extStr$sizeStr"
         }
     }
 }

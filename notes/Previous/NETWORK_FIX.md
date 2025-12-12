@@ -23,7 +23,7 @@ Wrapped all network calls with `withContext(Dispatchers.IO)` in:
 
 The app is now working! To download a Kafka PDF:
 
-1. **Open Pantheon app** on the emulator
+1. **Open Texton app** on the emulator
 2. **Tap the search icon** (magnifying glass) in the toolbar
 3. **Type**: `Kafka`
 4. **Press Enter**

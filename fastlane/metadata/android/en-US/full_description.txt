@@ -1,4 +1,4 @@
-Pantheon is an open-source application for downloading and converting EBooks.
+Texton is an open-source application for downloading and converting EBooks.
 
 Features:
 
@@ -8,15 +8,15 @@ Features:
 
 Download sources:
 
-Pantheon uses the following download sources:
+Texton uses the following download sources:
 
 * Libgen (https://libgen.li/) which is considered non-free for being a shadow library
 
 Ebook conversion sources:
 
-* Pantheon API (https://pantheon.up.railway.app) which is a proprietary custom-made source
+* Texton API (https://pantheon.up.railway.app) which is a proprietary custom-made source
 
-I will consider open-sourcing the Pantheon API once its mature enough.
+I will consider open-sourcing the Texton API once its mature enough.
 
 Source Code:
 

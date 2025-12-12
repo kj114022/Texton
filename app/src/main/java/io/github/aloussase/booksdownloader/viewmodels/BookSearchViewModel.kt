@@ -13,14 +13,10 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class BookSearchViewModel @Inject constructor(
+    @dagger.hilt.android.qualifiers.ApplicationContext private val context: android.content.Context,
     val filterBooks: FilterBooksUseCase,
     val bookSearchRepository: io.github.aloussase.booksdownloader.domain.repository.BookSearchRepository
 ) : ViewModel() {
-
-    init {
-        // Simulate trending/popular books by searching for a broad term initially
-        onSearch("bestsellers")
-    }
 
     sealed class Event {
         data class OnApplyFilter(val format: BookFormat) : Event()
@@ -63,18 +59,29 @@ class BookSearchViewModel @Inject constructor(
     }
 
     private fun onSearch(query: String) {
-        android.util.Log.d("BookSearchViewModel", "onSearch called with query: $query")
         _state.value = State.Loading
         viewModelScope.launch {
             try {
-                android.util.Log.d("BookSearchViewModel", "Starting repository search")
                 val results = bookSearchRepository.search(query)
-                android.util.Log.d("BookSearchViewModel", "Got ${results.size} results")
-                _books.value = results
+                
+                // NSFW Filtering
+                val prefs = context.getSharedPreferences("app_settings", android.content.Context.MODE_PRIVATE)
+                val allowNsfw = prefs.getBoolean("nsfw_enabled", false)
+                
+                val finalResults = if (allowNsfw) {
+                    results
+                } else {
+                    val nsfwKeywords = listOf("erotica", "xxx", "adult", "sex", "porn", "nude", "naked", "fetish")
+                    results.filter { book ->
+                        val lowerTitle = book.title.lowercase()
+                        nsfwKeywords.none { keyword -> lowerTitle.contains(keyword) }
+                    }
+                }
+
+                _books.value = finalResults
                 updateFilteredBooks()
-                _state.value = State.Loaded(results)
+                _state.value = State.Loaded(finalResults)
             } catch (e: Exception) {
-                android.util.Log.e("BookSearchViewModel", "Error during search", e)
                 _state.value = State.Error(e.message ?: "Unknown error")
             }
         }
@@ -96,5 +103,10 @@ class BookSearchViewModel @Inject constructor(
                 _filteredBooks.value = filterBooks.execute(books, filters)
             }
         }
+    }
+
+    init {
+        // Simulate trending/popular books by searching for a broad term initially
+        onSearch("popular") 
     }
 }

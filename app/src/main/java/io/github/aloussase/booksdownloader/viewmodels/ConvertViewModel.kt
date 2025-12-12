@@ -187,7 +187,7 @@ class ConvertViewModel @Inject constructor(
                 val filename = getUploadedFileName(uri)
                 val fileSize = getUploadedFileSize(uri)
 
-                if (fileSize != null && fileSize > 10) {
+                if (fileSize != null && fileSize > 50) {
                     viewModelScope.launch {
                         _error.send(
                             Error.FileSizeExceeded(

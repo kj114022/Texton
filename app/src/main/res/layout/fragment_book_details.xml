@@ -70,6 +70,29 @@
                 android:layout_marginTop="8dp"
                 tools:text="Libgen" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tvFormat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    tools:text="Format: PDF" />
+
+                <TextView
+                    android:id="@+id/tvSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    tools:text="Size: 12 MB" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"

@@ -28,7 +28,7 @@ class AnnasArchiveSource @Inject constructor() : BookSource {
             val bookLinks = doc.select("a[href^='/md5/']")
             android.util.Log.d("AnnasArchive", "Found ${bookLinks.size} potential books")
             
-            for (link in bookLinks.take(20)) {  // Limit to first 20
+            for (link in bookLinks.take(100)) {  // Limit to first 100
                 try {
                     val href = link.attr("href")
                     val fullUrl = "$baseUrl$href"

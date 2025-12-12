@@ -10,9 +10,9 @@
   <img alt="logo" src="app/src/main/res/drawable-night/logo.png" width=200/>
 </p>
 
-<h1 align=center>Pantheon</h1>
+<h1 align=center>Texton</h1>
 
-Pantheon is an open source application for downloading and converting EBooks.
+Texton is an open source application for downloading and converting EBooks.
 
 **Features**
 
@@ -21,14 +21,14 @@ Pantheon is an open source application for downloading and converting EBooks.
 
 **Anti-features**
 
-- Uses some non-free sources for downloading books. Specifically, Pantheon uses Libgen.
+- Uses some non-free sources for downloading books. Specifically, Texton uses Libgen.
   Libgen is considered a [shadow library](https://en.wikipedia.org/wiki/Shadow_library).
 - Uses a custom-made proprietary API for converting books from one format to another. I will
   consider open-sourcing this once it's mature enough.
 
 ## Install from F-droid
 
-Download the F-droid app from [their website](https://f-droid.org/) and search for Pantheon.
+Download the F-droid app from [their website](https://f-droid.org/) and search for Texton.
 
 ## Screenshots
 
@@ -39,7 +39,7 @@ Download the F-droid app from [their website](https://f-droid.org/) and search f
 
 ## Contributing
 
-Think you can make Pantheon better? Feel free to open an issue or PR about it!
+Think you can make Texton better? Feel free to open an issue or PR about it!
 
 ## License
 
