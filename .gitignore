@@ -58,3 +58,13 @@ captures/
 # notes/
 # notes/Previous
 # notes/Phase2
+
+# Legacy Kotlin/Android code - excluded from version control
+legacy/
+
+# Old Gradle files from Kotlin project
+build.gradle.kts
+settings.gradle.kts
+gradle.properties
+gradlew
+gradlew.bat
